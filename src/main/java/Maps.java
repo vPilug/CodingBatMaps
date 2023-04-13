@@ -121,7 +121,66 @@ public class Maps {
         System.out.println("{\"a\": \"aaa\", \"b\": \"bbb\", \"c\": \"cake\"}) → {\"a\": \"aaa\", \"b\": \"bbb\", \"c\": \"cake\"}");
         System.out.println("Result: " + mapAB3(mapAB3Map3)); //-->{"a": "aaa", "b": "bbb", "c": "cake"}) → {"a": "aaa", "b": "bbb", "c": "cake"}
         System.out.println("______________");
+
+        Map<String,String>  mapAB1= new HashMap<>();
+        mapAB1.put("a", "Hi");
+        mapAB1.put("b", "There");
+        System.out.println("Test mapAB");
+        System.out.println("{\"a\": \"Hi\", \"b\": \"There\"}) → {\"a\": \"Hi\", \"ab\": \"HiThere\", \"b\": \"There\"}");
+        System.out.println("Result: " + mapAB(mapAB1)); //-->{"a": "Hi", "b": "There"}) → {"a": "Hi", "ab": "HiThere", "b": "There"}
+        System.out.println("************");
+        Map<String,String>  mapAB2= new HashMap<>();
+        mapAB2.put("a", "Hi");
+        System.out.println("{\"a\": \"Hi\"}) → {\"a\": \"Hi\"}");
+        System.out.println("Result: " + mapAB(mapAB2)); //-->{"a": "Hi"}) → {"a": "Hi"}
+        System.out.println("************");
+        Map<String,String>  mapAB3= new HashMap<>();
+        mapAB3.put("b", "There");
+        System.out.println("{\"b\": \"There\"}) → {\"b\": \"There\"}");
+        System.out.println("Result: " + mapAB(mapAB3)); //-->{"b": "There"}) → {"b": "There"}
+        System.out.println("______________");
+
+        Map<String,String>  topping3Map1= new HashMap<>();
+        topping3Map1.put("potato", "ketchup");
+        System.out.println("Test topping3");
+        System.out.println("{\"potato\": \"ketchup\"}) → {\"potato\": \"ketchup\", \"fries\": \"ketchup\"}");
+        System.out.println("Result: " + topping3(topping3Map1)); //-->"potato": "ketchup"}) → {"potato": "ketchup", "fries": "ketchup"}
+        System.out.println("************");
+        Map<String,String>  topping3Map2= new HashMap<>();
+        topping3Map2.put("potato", "butter");
+        System.out.println("{\"potato\": \"butter\"}) → {\"potato\": \"butter\", \"fries\": \"butter\"}");
+        System.out.println("Result: " + topping3(topping3Map2)); //-->{"potato": "butter"}) → {"potato": "butter", "fries": "butter"}
+        System.out.println("************");
+        Map<String,String>  topping3Map3= new HashMap<>();
+        topping3Map3.put("salad", "oil");
+        topping3Map3.put("potato", "ketchup");
+        System.out.println("{\"salad\": \"oil\", \"potato\": \"ketchup\"}) → {\"spinach\": \"oil\", \"salad\": \"oil\", \"potato\": \"ketchup\", \"fries\": \"ketchup\"}");
+        System.out.println("Result: " + topping3(topping3Map3)); //-->{"salad": "oil", "potato": "ketchup"}) → {"spinach": "oil", "salad": "oil", "potato": "ketchup", "fries": "ketchup"}
+        System.out.println("______________");
+
+        Map<String,String>  mapAB4Map1= new HashMap<>();
+        mapAB4Map1.put("a", "aaa");
+        mapAB4Map1.put("b", "bb");
+        mapAB4Map1.put("c", "cake");
+        System.out.println("Test mapAB4");
+        System.out.println("{\"a\": \"aaa\", \"b\": \"bb\", \"c\": \"cake\"}) → {\"a\": \"aaa\", \"b\": \"bb\", \"c\": \"aaa\"}");
+        System.out.println("Result: " + mapAB4(mapAB4Map1)); //-->{"a": "aaa", "b": "bb", "c": "cake"}) → {"a": "aaa", "b": "bb", "c": "aaa"}
+        System.out.println("************");
+        Map<String,String>  mapAB4Map2= new HashMap<>();
+        mapAB4Map2.put("a", "aa");
+        mapAB4Map2.put("b", "bbb");
+        mapAB4Map2.put("c", "cake");
+        System.out.println("{\"a\": \"aa\", \"b\": \"bbb\", \"c\": \"cake\"}) → {\"a\": \"aa\", \"b\": \"bbb\", \"c\": \"bbb\"}");
+        System.out.println("Result: " + mapAB4(mapAB4Map2)); //-->{"a": "aa", "b": "bbb", "c": "cake"}) → {"a": "aa", "b": "bbb", "c": "bbb"}
+        System.out.println("************");
+        Map<String,String>  mapAB4Map3= new HashMap<>();
+        mapAB4Map3.put("a", "aa");
+        mapAB4Map3.put("b", "bbb");
+        System.out.println("{\"a\": \"aa\", \"b\": \"bbb\"}) → {\"a\": \"aa\", \"b\": \"bbb\", \"c\": \"bbb\"}");
+        System.out.println("Result: " + mapAB4(mapAB4Map3)); //-->{"a": "aa", "b": "bbb"}) → {"a": "aa", "b": "bbb", "c": "bbb"}
+        System.out.println("______________");
     }
+
     /*
         Modify and return the given map as follows: if the key "a" has a value, set the key "b" to have that value, and set the key "a" to have the value "".
         Basically "b" is a bully, taking the value and replacing it with the empty string.
@@ -196,6 +255,50 @@ public class Maps {
         }
         return map;
     }
+/*
+        Modify and return the given map as follows: for this problem the map may or may not contain the "a" and "b" keys.
+        If both keys are present, append their 2 string values together and store the result under the key "ab".
+ */
+public static Map<String, String> mapAB(Map<String, String> map) {
+    if(map.containsKey("a") && map.containsKey("b")) {
+        map.put("ab", map.get("a") + map.get("b"));
+    }
+    return map;
+}
+
+/*
+        Given a map of food keys and topping values, modify and return the map as follows: if the key "potato" has a value, set that as the value for the key "fries".
+        If the key "salad" has a value, set that as the value for the key "spinach".
+ */
+public static Map<String, String> topping3(Map<String, String> map) {
+    if(map.containsKey("potato")) {
+        map.put("fries", map.get("potato"));
+    }
+    if(map.containsKey("salad")) {
+        map.put("spinach", map.get("salad"));
+    }
+    return map;
+}
+
+/*
+        Modify and return the given map as follows: if the keys "a" and "b" have values that have different lengths, then set "c" to have the longer value.
+        If the values exist and have the same length, change them both to the empty string in the map.
+ */
+public static Map<String, String> mapAB4(Map<String, String> map) {
+    if(map.get("a") != null && map.get("b") != null) {
+        if( map.get("a").length() != map.get("b").length()) {
+            if(map.get("a").length() > map.get("b").length()){
+                map.put("c", map.get("a"));
+            } else
+                map.put("c", map.get("b"));
+        }
+        if(map.get("a").length() == map.get("b").length()) {
+            map.put("a", "");
+            map.put("b", "");
+        }
+    }
+    return map;
+}
 
 }
 
